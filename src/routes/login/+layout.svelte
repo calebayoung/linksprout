@@ -1,5 +1,6 @@
 <script lang="ts">
 import { page } from '$app/stores'
+import AnimatedRoute from '$lib/components/AnimatedRoute.svelte'
 </script>
 
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -61,10 +62,12 @@ import { page } from '$app/stores'
         </li>
       </ol>
     </nav>
-    <div class="bg-white shadow sm:rounded-lg">
-      <div class="px-4 py-5 sm:p-6">
-        <slot />
+    <AnimatedRoute>
+      <div class="bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <slot />
+        </div>
       </div>
-    </div>
+    </AnimatedRoute>
   </div>
 </div>
