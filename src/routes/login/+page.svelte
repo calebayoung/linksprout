@@ -1,6 +1,7 @@
 <script lang="ts">
 import { auth, user } from '$lib/firebase'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import LoginCardHead from '$lib/components/LoginCardHead.svelte';
 
 
 async function signInWithGoogle() {
@@ -11,10 +12,9 @@ async function signInWithGoogle() {
 </script>
 
 <div class="w-100 flex flex-col items-center">
-  <p class="text-lime-600"><i class="fa-regular fa-seedling fa-2xl"></i></p>
-  <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+  <LoginCardHead/>
   {#if $user}
-    <p class="mt-10">Welcome, {$user.displayName}</p>
+    <p class="mt-8">Welcome, {$user.displayName}</p>
     <p class="mt-4">You are signed in</p>
     <button on:click={() => signOut(auth)} class="flex w-full max-w-64 mt-10 mb-2 items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
       <i class="fa-regular fa-right-to-bracket"></i>

@@ -62,7 +62,7 @@ import AnimatedRoute from '$lib/components/AnimatedRoute.svelte'
     </nav>
     <AnimatedRoute>
       <div class="bg-white shadow sm:rounded-lg">
-        <div class="px-4 py-10">
+        <div class="px-16 py-10">
           <slot />
         </div>
       </div>

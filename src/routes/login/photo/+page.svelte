@@ -1,5 +1,5 @@
 <script lang="ts">
-
+import LoginCardHead from '$lib/components/LoginCardHead.svelte'
 </script>
 
-<h2>Photo</h2>
+<LoginCardHead icon="fa-image" title="Upload a profile photo" />
