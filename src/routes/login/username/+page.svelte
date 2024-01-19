@@ -28,7 +28,18 @@ async function checkAvailability () {
   }, 500);
 }
 
-async function confirmUsername () {}
+async function confirmUsername () {
+  const batch = writeBatch(db);
+  batch.set(doc(db, 'usernames', username), { uid: $user?.uid })
+  batch.set(doc(db, 'users', $user!.uid), {
+    username,
+    photoUrl: $user?.photoURL ?? null,
+    published: true,
+    bio: '',
+    links: []
+  });
+  await batch.commit();
+}
 </script>
 
 <AuthCheck>
@@ -71,11 +82,8 @@ async function confirmUsername () {}
       <p class="mt-2 text-sm text-red-600" id="email-error">This username is not available.</p>
     {/if}
     <button
-      type="button"
-      class="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600 mt-4"
-      class:bg-gray-300={!isAvailable}
-      class:hover:bg-gray-300={!isAvailable}
-      class:focus-visible:outline-gray-300={!isAvailable}
+      type="submit"
+      class="rounded-md bg-lime-600 disabled:bg-gray-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 disabled:hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600 disabled:focus-visible:outline-gray-300 mt-4"
       disabled={!isAvailable}
     >
       Confirm username{username.length > 0 ? ' @' + username : ''}
