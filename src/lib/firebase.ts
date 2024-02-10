@@ -117,7 +117,7 @@ export function docStore<T> (path: string): DocStore<T> {
 interface UserData {
   username: string
   bio: string
-  photoURL: string
+  photoUrl: string
   published: boolean
   links: any[]
 }
