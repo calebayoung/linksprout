@@ -12,10 +12,10 @@ try {
     })
   })
 } catch (err: any) {
-  if (!/already exists/u.test(err.message)) {
+  if ((err.message as string).includes('already exists')) {
     console.error('Firebase Admin Error: ', err.stack)
   }
 }
 
-export const adminDb = getFirestore();
-export const adminAuth = getAuth();
+export const adminDb = getFirestore()
+export const adminAuth = getAuth()

@@ -2,43 +2,48 @@
 import { doc, getDoc, writeBatch } from 'firebase/firestore'
 import { db, user } from '$lib/firebase'
 import AuthCheck from '$lib/components/AuthCheck.svelte'
-import LoginCardHead from '$lib/components/LoginCardHead.svelte';
+import LoginCardHead from '$lib/components/LoginCardHead.svelte'
 
-let username = '';
-let loading = false;
-let availabilityChecked = false;
-let isAvailable = false;
-let debounceTimer: NodeJS.Timeout;
+let username = ''
+let loading = false
+let availabilityChecked = false
+let isAvailable = false
+let debounceTimer: NodeJS.Timeout
 
-async function checkAvailability () {
-  availabilityChecked = false;
-  isAvailable = false;
-  loading = true;
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(async () => {
-    if (username.length < 1) {
-      loading = false;
-      return;
-    }
-    const ref = doc(db, 'usernames', username);
-    const exists = await getDoc(ref).then(doc => doc.exists());
-    availabilityChecked = true;
-    isAvailable = !exists;
-    loading = false;
-  }, 500);
+async function queryUsernameExists (): Promise<void> {
+  if (username.length < 1) {
+    loading = false
+    return
+  }
+  const ref = doc(db, 'usernames', username)
+  const exists = await getDoc(ref).then(doc => doc.exists())
+  availabilityChecked = true
+  isAvailable = !exists
+  loading = false
 }
 
-async function confirmUsername () {
-  const batch = writeBatch(db);
-  batch.set(doc(db, 'usernames', username), { uid: $user?.uid })
-  batch.set(doc(db, 'users', $user!.uid), {
+async function checkAvailability (): Promise<void> {
+  availabilityChecked = false
+  isAvailable = false
+  loading = true
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => { void queryUsernameExists() }, 500)
+}
+
+async function confirmUsername (): Promise<void> {
+  if (username === null || $user === null) {
+    return
+  }
+  const batch = writeBatch(db)
+  batch.set(doc(db, 'usernames', username), { uid: $user.uid })
+  batch.set(doc(db, 'users', $user.uid), {
     username,
     photoUrl: $user?.photoURL ?? null,
     published: true,
     bio: '',
     links: []
-  });
-  await batch.commit();
+  })
+  await batch.commit()
 }
 </script>
 
