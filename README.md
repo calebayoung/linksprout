@@ -1,4 +1,4 @@
-https://github.com/calebayoung/linksprout/actions/workflows/main.yml/badge.svg
+![ESLint](https://github.com/calebayoung/linksprout/actions/workflows/main.yml/badge.svg)
 
 # create-svelte
 
