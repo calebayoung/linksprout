@@ -4,6 +4,8 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { db, storage, user, userData } from '$lib/firebase'
 import AuthCheck from '$lib/components/AuthCheck.svelte'
 import LoginCardHead from '$lib/components/LoginCardHead.svelte'
+import Photo from '$lib/components/Photo.svelte'
+import LoadingSpinner from '$lib/components/LoadingSpinner.svelte'
 
 let uploadNewPhoto: boolean = false
 let file: Blob
@@ -42,13 +44,7 @@ async function saveProfilePhoto (): Promise<void> {
   <LoginCardHead icon="fa-image" title="Upload a profile photo"/>
   <form class="max-w-96 mx-auto mt-6 flex flex-col items-center space-y-8" autocomplete="off">
     {#if previewUrl != null || $userData?.photoUrl != null}
-      <picture class="flex max-h-32 max-w-32">
-        <img
-          src={previewUrl ?? $userData?.photoUrl}
-          alt="photoUrl"
-          class="h-100 w-100 object-center object-cover rounded"
-        />
-      </picture>
+      <Photo photoUrl="{previewUrl ?? $userData?.photoUrl}"/>
     {:else}
       <div class="flex justify-center">
         <span class="inline-block h-14 w-14 overflow-hidden rounded-full bg-gray-100">
@@ -88,35 +84,15 @@ async function saveProfilePhoto (): Promise<void> {
           Save this profile photo
         </button>
       {:else}
-        <div class="flex items-center space-x-2">
-          <i class="fa-regular fa-loader"/>
-          <p class="mb-0">Uploading...</p>
-        </div>
+        <LoadingSpinner text="Uploading..."/>
       {/if}
     {/if}
     {#if !uploading}
-      <a href="/" class="flex items-center space-x-2 hover:text-lime-700">
+      <!-- TODO: update this link -->
+      <a href="/login/photo" class="flex items-center space-x-2 hover:text-lime-700">
         <p>Continue</p>
         <i class="fa-regular fa-arrow-right"/>
       </a>
     {/if}
   </form>
 </AuthCheck>
-
-<style>
-.fa-loader {
-  animation-name: spin;
-  animation-duration: 1500ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-@keyframes spin {
-  from {
-    transform:rotate(0deg);
-  }
-  to {
-    transform:rotate(360deg);
-  }
-}
-</style>
