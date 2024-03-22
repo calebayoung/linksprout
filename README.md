@@ -4,7 +4,7 @@
 
 A basic link-sharing application, modeled after LinkTree.
 
-Built following the [Fireship SvelteKit Full Course](https://fireship.io/courses/sveltekit/)
+Built following the [Fireship SvelteKit Full Course](https://fireship.io/courses/sveltekit/) (example source repo [here](https://github.com/fireship-io/fkit-course)).
 
 ### Important Commands
 

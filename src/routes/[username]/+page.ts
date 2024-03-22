@@ -15,7 +15,7 @@ export const load = (async ({ params }) => {
   const data = snapshot.docs[0]?.data()
 
   if (!exists) {
-    throw error(404, 'User not found.') as Error
+    throw error(404, 'Page not found.') as Error
   }
 
   if (data.published === false) {
