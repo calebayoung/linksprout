@@ -4,7 +4,7 @@
 
 A basic link-sharing application, modeled after LinkTree.
 
-Built following the [Fireship SvelteKit Full Course](https://fireship.io/courses/sveltekit/) (example source repo [here](https://github.com/fireship-io/fkit-course)).
+Built by following the [Fireship SvelteKit Full Course](https://fireship.io/courses/sveltekit/)
 
 ### Important Commands
 
@@ -30,3 +30,17 @@ Preview a production version of the app:
 ```bash
 npm run preview
 ```
+
+### Relevant Links
+
+[fkit-course Repo](https://github.com/fireship-io/fkit-course/tree/main)
+
+[Live Course Site](https://kung.foo/)
+
+[SvelteKit Full Course](https://fireship.io/courses/sveltekit/)
+
+[Tailwind UI](https://tailwindui.com/)
+
+[Tailwind CSS](https://tailwindcss.com/)
+
+[FontAwesome](https://fontawesome.com/)

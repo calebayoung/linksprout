@@ -1,12 +1,12 @@
 <script lang="ts">
-import { auth, user } from '$lib/firebase'
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import LoginCardHead from '$lib/components/LoginCardHead.svelte'
+  import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+  import { auth, user } from '$lib/firebase'
+  import LoginCardHead from '$lib/components/LoginCardHead.svelte'
 
-async function signInWithGoogle (): Promise<void> {
-  const provider = new GoogleAuthProvider()
-  await signInWithPopup(auth, provider)
-}
+  async function signInWithGoogle (): Promise<void> {
+    const provider = new GoogleAuthProvider()
+    await signInWithPopup(auth, provider)
+  }
 </script>
 
 <div class="w-100 flex flex-col items-center">
