@@ -14,5 +14,5 @@
     bio={data.bio}
     links={data.links}
   />
-  <Button>Add a link</Button>
+  <Button><i class="fa-regular fa-link mr-3"></i><span>Add a link</span></Button>
 </EditCheck>

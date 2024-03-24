@@ -5,6 +5,7 @@ import { db, storage, user, userData } from '$lib/firebase'
 import AuthCheck from '$lib/components/AuthCheck.svelte'
 import LoginCardHead from '$lib/components/LoginCardHead.svelte'
 import Photo from '$lib/components/Photo.svelte'
+import Button from '$lib/components/Button.svelte'
 import LoadingSpinner from '$lib/components/LoadingSpinner.svelte'
 
 let uploadNewPhoto: boolean = false
@@ -55,13 +56,7 @@ async function saveProfilePhoto (): Promise<void> {
       </div>
     {/if}
     {#if !uploadNewPhoto}
-      <button
-        type="button"
-        on:click={chooseToUploadNewPhoto}
-        class="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600"
-      >
-        Upload a new profile photo
-      </button>
+      <Button onClick={chooseToUploadNewPhoto}><a href="/login/photo" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-upload"></i><span>Upload a new profile photo</span></a></Button>
     {:else if previewUrl == null}
       <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-8 py-10">
         <div class="flex flex-col items-center text-center">
@@ -88,8 +83,7 @@ async function saveProfilePhoto (): Promise<void> {
       {/if}
     {/if}
     {#if !uploading}
-      <!-- TODO: update this link -->
-      <a href="/login/photo" class="flex items-center space-x-2 hover:text-lime-700">
+      <a href="/{$userData?.username}" class="flex items-center space-x-2 hover:text-lime-700">
         <p>Continue</p>
         <i class="fa-regular fa-arrow-right"/>
       </a>

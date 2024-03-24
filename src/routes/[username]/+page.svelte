@@ -19,5 +19,5 @@
   links={data.links}
 />
 {#if $userData?.username === data.username}
-  <Button><a href="{data.username}/edit" class="w-full flex justify-center">Edit your profile</a></Button>
+  <Button><a href="{data.username}/edit" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-pen-to-square"></i><span>Edit your profile</span></a></Button>
 {/if}

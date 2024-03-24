@@ -3,6 +3,7 @@ import { doc, getDoc, writeBatch } from 'firebase/firestore'
 import { db, user, userData } from '$lib/firebase'
 import AuthCheck from '$lib/components/AuthCheck.svelte'
 import LoginCardHead from '$lib/components/LoginCardHead.svelte'
+import Button from '$lib/components/Button.svelte'
 import LoadingSpinner from '$lib/components/LoadingSpinner.svelte'
 
 let username = ''
@@ -55,14 +56,7 @@ async function confirmUsername (): Promise<void> {
       <div class="flex flex-col justify-center items-center mt-8 space-y-6">
         <p class="text-center">Your username is <strong>@{ $userData.username }</strong></p>
         <p class="text-center">(Usernames cannot be changed.)</p>
-        <a href="/login/photo">
-          <button
-            type="button"
-            class="rounded-md bg-lime-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600"
-          >
-            Upload profile photo
-          </button>
-        </a>
+        <Button><a href="/login/photo" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-upload"></i><span>Upload profile photo</span></a></Button>
       </div>
     {:else}
       <form on:submit|preventDefault={confirmUsername} class="max-w-96 mx-auto mt-6" autocomplete="off">
