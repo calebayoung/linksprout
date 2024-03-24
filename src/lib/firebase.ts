@@ -114,7 +114,7 @@ export function docStore<T> (path: string): DocStore<T> {
  * Provides type support for the fields
  * we expect to read from the user data store
  */
-interface UserData {
+export interface UserData {
   username: string
   bio: string
   photoUrl: string
