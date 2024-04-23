@@ -1,12 +1,18 @@
 <script lang="ts">
   import { writable } from 'svelte/store'
+  import { invalidate } from '$app/navigation'
+  import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore'
   import type { PageData } from './$types'
+  import { db, user } from '$lib/firebase'
   import EditCheck from '$lib/components/EditCheck.svelte'
   import Profile from '$lib/components/Profile.svelte'
   import Button from '$lib/components/Button.svelte'
   import ButtonFormSubmit from '$lib/components/ButtonFormSubmit.svelte'
 
   export let data: PageData
+
+  let addLinkFormDisplayed = false
+  let addLinkFormLoading = false
 
   const namePlaceholders: Record<string, string> = {
     standard: 'My Website',
@@ -18,12 +24,12 @@
   }
 
   const urlPlaceholders: Record<string, string> = {
-    standard: 'mywebsite.io',
-    twitter: 'twitter.com/handle',
-    youtube: 'youtube.com/@channel',
-    tiktok: 'tiktok.com/@handle',
-    linkedin: 'linkedin.com/in/profile',
-    github: 'github.com/handle'
+    standard: 'https://mywebsite.io',
+    twitter: 'https://twitter.com/handle',
+    youtube: 'https://www.youtube.com/@channel',
+    tiktok: 'https://www.tiktok.com/@handle',
+    linkedin: 'https://linkedin.com/in/profile',
+    github: 'https://github.com/handle'
   }
 
   const formDefaults = {
@@ -33,18 +39,46 @@
   }
   const formData = writable(formDefaults)
 
-  let addLinkFormDisplayed = false
-
   function showAddLinkForm (): void {
     addLinkFormDisplayed = true
   }
 
-  function hideAddLinkForm (): void {
+  function cancelAddLinkForm (): void {
     addLinkFormDisplayed = false
+    formData.set(formDefaults)
   }
 
-  function addLink (): void {
-    console.log('TODO: save link to Firestore')
+  async function addLink (): Promise<void> {
+    if ($user === null) {
+      return
+    }
+    addLinkFormLoading = true
+    const userRef = doc(db, 'users', $user.uid)
+    await updateDoc(userRef, {
+      links: arrayUnion({
+        ...$formData,
+        id: Date.now().toString()
+      })
+    })
+    await invalidate('profile:links')
+    formData.set({
+      type: 'standard',
+      name: '',
+      url: ''
+    })
+    addLinkFormDisplayed = false
+    addLinkFormLoading = false
+  }
+
+  async function deleteLink (event: any): Promise<void> {
+    if ($user === null) {
+      return
+    }
+    const userRef = doc(db, 'users', $user.uid)
+    await updateDoc(userRef, {
+      links: arrayRemove(event.detail)
+    })
+    await invalidate('profile:links')
   }
 </script>
 
@@ -54,6 +88,7 @@
     photoUrl={data.photoUrl}
     bio={data.bio}
     links={data.links}
+    on:trashLink={deleteLink}
   />
   <div class="w-full max-w-96">
     <hr class="w-full border-t border-gray-900/10 m-0"/>
@@ -85,14 +120,13 @@
         <label for="url" class="block text-sm font-medium leading-6 text-gray-900">URL</label>
         <div class="mt-2">
           <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-lime-600 sm:max-w-md">
-            <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">https://</span>
-            <input bind:value={$formData.url} type="text" name="url" id="url" autocomplete="url" class="block flex-1 border-0 bg-transparent py-1.5 pl-0.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder={urlPlaceholders[$formData.type]}>
+            <input bind:value={$formData.url} type="text" name="url" id="url" autocomplete="url" class="block flex-1 border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder={urlPlaceholders[$formData.type]}>
           </div>
         </div>
       </div>
       <div class="flex justify-end items-center gap-x-6 pt-2">
-        <button on:click={hideAddLinkForm} type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-        <ButtonFormSubmit>Save</ButtonFormSubmit>
+        <button on:click={cancelAddLinkForm} type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+        <ButtonFormSubmit loading={addLinkFormLoading}>Save</ButtonFormSubmit>
       </div>
     </form>
   {:else}
