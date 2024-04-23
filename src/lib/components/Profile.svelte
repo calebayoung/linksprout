@@ -7,6 +7,7 @@
   export let photoUrl = '/user.png'
   export let bio = ''
   export let links: any[]
+  export let edit = false
 
   const dispatch = createEventDispatcher()
   function onTrash (event: any): void {
@@ -28,7 +29,7 @@
 <ul class="w-full max-w-96 space-y-4">
   {#each links as link}
     <li class="w-full flex">
-      <UserLink id={link.id} type={link.type} url={link.url} name={link.name} on:trash={onTrash}/>
+      <UserLink id={link.id} type={link.type} url={link.url} name={link.name} edit={edit} on:trash={onTrash}/>
     </li>
   {/each}
 </ul>

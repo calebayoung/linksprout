@@ -88,6 +88,7 @@
     photoUrl={data.photoUrl}
     bio={data.bio}
     links={data.links}
+    edit={true}
     on:trashLink={deleteLink}
   />
   <div class="w-full max-w-96">

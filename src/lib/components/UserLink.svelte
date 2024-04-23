@@ -5,6 +5,7 @@
   export let type = 'standard'
   export let url = 'foo'
   export let name = 'Link'
+  export let edit = false
   export let loading = false
 
   const dispatch = createEventDispatcher()
@@ -30,15 +31,17 @@
 
 <a href={url} class="group/link w-full ring-1 ring-gray-300 shadow-sm hover:bg-gray-50 rounded p-4 flex items-center">
   <i class="{typeIconMap[type] ?? 'fa-regular fa-link'} text-gray-600"/>
-  <span class="w-full flex justify-center pr-8 ml-8">{name}</span>
+  <span class="w-full flex justify-center pr-8 ml-10">{name}</span>
   {#if loading}
     <div class="flex justify-center items-center rounded bg-red-500">
       <i class="fa-regular fa-loader text-white p-2"/>
     </div>
-  {:else}
+  {:else if edit}
     <button on:click|preventDefault={onTrash} class="group/trash flex justify-center items-center rounded invisible group-hover/link:visible hover:bg-red-500 m-0">
       <i class="fa-regular fa-trash-can text-red-400 group-hover/trash:text-white p-2"/>
     </button>
+  {:else}
+    <div class="p-4"/>
   {/if}
 </a>
 
