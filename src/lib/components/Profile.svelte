@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import Photo from '$lib/components/Photo.svelte'
+  import SortableList from '$lib/components/SortableList.svelte'
   import UserLink from '$lib/components/UserLink.svelte'
 
   export let username: string
@@ -10,6 +11,7 @@
   export let edit = false
 
   const dispatch = createEventDispatcher()
+
   function onTrash (event: any): void {
     dispatch('trashLink', {
       id: event.detail.id,
@@ -17,6 +19,10 @@
       url: event.detail.url,
       name: event.detail.name
     })
+  }
+
+  function sortList (event: any): void {
+    dispatch('sort', event.detail)
   }
 </script>
 
@@ -26,10 +32,16 @@
 {#if bio}
   <p>{bio}</p>
 {/if}
-<ul class="w-full max-w-96 space-y-4">
-  {#each links as link}
-    <li class="w-full flex">
-      <UserLink id={link.id} type={link.type} url={link.url} name={link.name} edit={edit} on:trash={onTrash}/>
-    </li>
-  {/each}
-</ul>
+{#if edit}
+  <SortableList list={links} on:sort={sortList} let:item let:index>
+    <UserLink {...item} edit={true} />
+  </SortableList>
+{:else}
+  <ul class="w-full max-w-96 space-y-4">
+    {#each links as link}
+      <li class="w-full flex">
+        <UserLink id={link.id} type={link.type} url={link.url} name={link.name} edit={false} on:trash={onTrash}/>
+      </li>
+    {/each}
+  </ul>
+{/if}

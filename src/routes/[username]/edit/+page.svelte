@@ -1,7 +1,13 @@
 <script lang="ts">
   import { writable } from 'svelte/store'
   import { invalidate } from '$app/navigation'
-  import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore'
+  import {
+    arrayRemove,
+    arrayUnion,
+    doc,
+    setDoc,
+    updateDoc
+  } from 'firebase/firestore'
   import type { PageData } from './$types'
   import { db, user } from '$lib/firebase'
   import EditCheck from '$lib/components/EditCheck.svelte'
@@ -70,6 +76,7 @@
     addLinkFormLoading = false
   }
 
+  // TODO: Refactor this method so it lives in the UserLink component
   async function deleteLink (event: any): Promise<void> {
     if ($user === null) {
       return
@@ -79,6 +86,15 @@
       links: arrayRemove(event.detail)
     })
     await invalidate('profile:links')
+  }
+
+  async function sort (event: any): Promise<void> {
+    if ($user === null) {
+      return
+    }
+    data.links = event.detail
+    const userRef = doc(db, 'users', $user.uid)
+    await setDoc(userRef, { links: data.links }, { merge: true })
   }
 </script>
 
@@ -90,6 +106,7 @@
     links={data.links}
     edit={true}
     on:trashLink={deleteLink}
+    on:sort={sort}
   />
   <div class="w-full max-w-96">
     <hr class="w-full border-t border-gray-900/10 m-0"/>
