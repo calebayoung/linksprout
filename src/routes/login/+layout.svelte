@@ -15,7 +15,7 @@ import AnimatedRoute from '$lib/components/AnimatedRoute.svelte'
             <span class="text-sm font-medium text-lime-600 group-hover:text-lime-800">
               Step 1
             </span>
-            <span class="text-sm font-medium">Sign in</span>
+            <span class="text-sm font-medium">Log in</span>
           </a>
         </li>
         <li class="md:flex-1">

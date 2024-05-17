@@ -5,5 +5,5 @@
 {#if $user}
   <slot/>
 {:else}
-  <p class="text-center">You must be signed in to view this page.</p>
+  <p class="text-center">You must be logged in to view this page.</p>
 {/if}

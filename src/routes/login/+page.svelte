@@ -5,7 +5,22 @@
 
   async function signInWithGoogle (): Promise<void> {
     const provider = new GoogleAuthProvider()
-    await signInWithPopup(auth, provider)
+    const credential = await signInWithPopup(auth, provider)
+
+    const idToken = await credential.user.getIdToken()
+
+    await fetch('/api/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ idToken })
+    })
+  }
+
+  async function signOutSSR (): Promise<void> {
+    await fetch('/api/signin', { method: 'DELETE' })
+    await signOut(auth)
   }
 </script>
 
@@ -13,10 +28,10 @@
   <LoginCardHead/>
   {#if $user}
     <p class="mt-8">Welcome, {$user.displayName}</p>
-    <p class="mt-4">You are signed in</p>
-    <button on:click={async () => { await signOut(auth) }} class="flex w-full max-w-64 mt-10 mb-2 items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
+    <p class="mt-4">You are logged in</p>
+    <button on:click={signOutSSR} class="flex w-full max-w-64 mt-10 mb-2 items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
       <i class="fa-regular fa-right-to-bracket"></i>
-      <span class="text-sm font-semibold leading-6">Sign out</span>
+      <span class="text-sm font-semibold leading-6">Log out</span>
     </button>
   {:else}
     <button on:click={signInWithGoogle} class="flex w-full max-w-64 mt-10 mb-2 items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
