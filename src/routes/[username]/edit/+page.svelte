@@ -149,5 +149,6 @@
     </form>
   {:else}
     <Button onClick={showAddLinkForm}><i class="fa-regular fa-link mr-3"></i><span>Add a link</span></Button>
+    <Button><a href="/{data.username}" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-floppy-disk"></i><span>Save changes</span></a></Button>
   {/if}
 </EditCheck>

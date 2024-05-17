@@ -30,7 +30,11 @@
 </script>
 
 <a href={url} class="group/link w-full ring-1 ring-gray-300 shadow-sm hover:bg-gray-50 rounded p-4 flex items-center">
-  <i class="{typeIconMap[type] ?? 'fa-regular fa-link'} text-gray-600"/>
+  {#if edit}
+    <i class="fa-regular fa-grip-dots-vertical text-gray-600"/>
+  {:else}
+    <i class="{typeIconMap[type] ?? 'fa-regular fa-link'} text-gray-600"/>
+  {/if}
   <span class="w-full flex justify-center pr-8 ml-10">{name}</span>
   {#if loading}
     <div class="flex justify-center items-center rounded bg-red-500">

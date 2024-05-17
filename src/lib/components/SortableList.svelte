@@ -53,7 +53,7 @@
 </script>
 
 {#if list.length}
-  <ul class="w-full max-w-96 space-y-4">
+  <ul class="w-full max-w-96">
     <!-- Keyed Each Block: Allows Svelte to track a unique ID for each item, -->
     <!-- allowing it to render efficiently as we sort it. -->
     {#each list as item, index (item.id)}

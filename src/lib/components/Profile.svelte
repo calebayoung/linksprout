@@ -37,9 +37,9 @@
     <UserLink {...item} edit={true} />
   </SortableList>
 {:else}
-  <ul class="w-full max-w-96 space-y-4">
+  <ul class="w-full max-w-96">
     {#each links as link}
-      <li class="w-full flex">
+      <li class="w-full flex border-2 border-white p-2">
         <UserLink id={link.id} type={link.type} url={link.url} name={link.name} edit={false} on:trash={onTrash}/>
       </li>
     {/each}
