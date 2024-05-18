@@ -6,7 +6,17 @@ A basic link-sharing application, modeled after LinkTree.
 
 Built by following the [Fireship SvelteKit Full Course](https://fireship.io/courses/sveltekit/)
 
-### Important Commands
+## Setup
+
+Ater cloning this repository, you'll need a `.env` file in the root directory with the following Firebase values:
+
+```
+FB_PROJECT_ID=""
+FB_CLIENT_EMAIL=""
+FB_PRIVATE_KEY=""
+```
+
+## Important Commands
 
 Install dependencies:
 ```bash
@@ -31,7 +41,7 @@ Preview a production version of the app:
 npm run preview
 ```
 
-### Relevant Links
+## Relevant Links
 
 [fkit-course Repo](https://github.com/fireship-io/fkit-course/tree/main)
 
