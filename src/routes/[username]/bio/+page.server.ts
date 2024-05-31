@@ -1,19 +1,23 @@
 import type { PageServerLoad } from './$types'
-import { adminAuth, adminDb } from '$lib/server/admin'
-import { error } from '@sveltejs/kit'
+import { adminDb } from '$lib/server/admin'
+import { error, redirect } from '@sveltejs/kit'
 
-export const load = (async ({ cookies }) => {
-  const sessionCookie = cookies.get('__session')
+export const load = (async ({ locals, params }) => {
+  const uid = locals.userID
+  if (uid == null) {
+    throw redirect(301, '/login') as Error
+  }
 
-  try {
-    const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie as string)
-    const userDoc = await adminDb.collection('users').doc(decodedClaims.uid).get()
-    const userData = userDoc.data()
+  const userDoc = await adminDb.collection('users').doc(uid).get()
+  const userData = userDoc.data()
+  const username = userData?.username
+  const bio = userData?.bio
 
-    return {
-      bio: userData?.bio
-    }
-  } catch (e) {
-    throw error(401, 'Unauthorized request') as Error
+  if (params.username !== username) {
+    throw error(401, 'You cannot edit a bio that is not your own.') as Error
+  }
+
+  return {
+    bio
   }
 }) satisfies PageServerLoad
