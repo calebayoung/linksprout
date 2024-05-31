@@ -6,14 +6,13 @@
 
   export let data: PageData
 
-  let initialBio = data.bio
   let formLoading = false
   let saveSuccess = false
 </script>
 
 <p class="text-lime-600 text-center"><i class="fa-regular fa-seedling fa-2xl"></i></p>
 <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Edit Bio</h1>
-<p>Your current bio: {data.bio || initialBio}</p>
+<p>Your current bio: {data.bio}</p>
 {#if $page.form?.problem}
 <div class="w-full max-w-96 rounded-md bg-red-50 p-4">
   <div class="flex">
@@ -50,19 +49,19 @@
   use:enhance={({ formElement, formData, action, cancel, submitter }) => {
     formLoading = true
     saveSuccess = false
-    return async ({ result, update }) => {
-      update()
+    return ({ result, update }) => {
+      void update()
+      if (result?.status !== 400) {
+        saveSuccess = true
+      }
       formLoading = false
-      saveSuccess = true
-      initialBio = data.bio
-      data.bio = ''
     }
   }}
 >
   <div>
     <label for="bio" class="block text-sm font-medium leading-6 text-gray-900">Bio</label>
     <div class="mt-2">
-      <textarea rows="4" name="bio" id="bio" value={data.bio || initialBio} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"></textarea>
+      <textarea rows="4" name="bio" id="bio" value={data.bio} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"></textarea>
     </div>
   </div>
   <div>
