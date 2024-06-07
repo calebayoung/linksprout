@@ -1,7 +1,11 @@
 <script lang="ts">
+  import { goto } from '$app/navigation'
   import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
   import { auth, user } from '$lib/firebase'
+  import type { PageData } from './$types'
   import LoginCardHead from '$lib/components/LoginCardHead.svelte'
+
+  export let data: PageData
 
   async function signInWithGoogle (): Promise<void> {
     const provider = new GoogleAuthProvider()
@@ -21,6 +25,11 @@
   async function signOutSSR (): Promise<void> {
     await fetch('/api/signin', { method: 'DELETE' })
     await signOut(auth)
+  }
+
+  if (data.action === 'signOut' && $user !== null) {
+    void signOutSSR()
+    void goto('/login')
   }
 </script>
 

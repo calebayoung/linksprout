@@ -2,6 +2,7 @@
   import { enhance } from '$app/forms'
   import { page } from '$app/stores'
   import type { PageData } from './$types'
+  import { userData } from '$lib/firebase'
   import ButtonFormSubmit from '$lib/components/ButtonFormSubmit.svelte'
 
   export let data: PageData
@@ -61,10 +62,16 @@
   <div>
     <label for="bio" class="block text-sm font-medium leading-6 text-gray-900">Bio</label>
     <div class="mt-2">
-      <textarea rows="4" name="bio" id="bio" value={data.bio} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"></textarea>
+      <textarea rows="4" name="bio" id="bio" bind:value={data.bio} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"></textarea>
     </div>
   </div>
   <div>
     <ButtonFormSubmit loading={formLoading}>Save</ButtonFormSubmit>
   </div>
 </form>
+<div class="w-full max-w-96">
+  <a href="/{$userData?.username}" class="flex items-center space-x-2 hover:text-lime-700">
+    <i class="fa-regular fa-arrow-left"/>
+    <p>Back to profile</p>
+  </a>
+</div>

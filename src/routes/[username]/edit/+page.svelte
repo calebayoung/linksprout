@@ -2,7 +2,6 @@
   import { writable } from 'svelte/store'
   import { invalidate } from '$app/navigation'
   import {
-    arrayRemove,
     arrayUnion,
     doc,
     setDoc,
@@ -76,18 +75,6 @@
     addLinkFormLoading = false
   }
 
-  // TODO: Refactor this method so it lives in the UserLink component
-  async function deleteLink (event: any): Promise<void> {
-    if ($user === null) {
-      return
-    }
-    const userRef = doc(db, 'users', $user.uid)
-    await updateDoc(userRef, {
-      links: arrayRemove(event.detail)
-    })
-    await invalidate('profile:links')
-  }
-
   async function sort (event: any): Promise<void> {
     if ($user === null) {
       return
@@ -105,7 +92,6 @@
     bio={data.bio}
     links={data.links}
     edit={true}
-    on:trashLink={deleteLink}
     on:sort={sort}
   />
   <div class="w-full max-w-96">

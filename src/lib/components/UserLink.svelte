@@ -1,22 +1,30 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { arrayRemove, doc, updateDoc } from 'firebase/firestore'
+  import { invalidate } from '$app/navigation'
+  import { db, user } from '$lib/firebase'
 
   export let id = ''
   export let type = 'standard'
-  export let url = 'foo'
+  export let url = ''
   export let name = 'Link'
   export let edit = false
   export let loading = false
 
-  const dispatch = createEventDispatcher()
-  function onTrash (): void {
+  async function onTrash (): Promise<void> {
     loading = true
-    dispatch('trash', {
-      id,
-      type,
-      url,
-      name
+    if ($user === null) {
+      return
+    }
+    const userRef = doc(db, 'users', $user.uid)
+    await updateDoc(userRef, {
+      links: arrayRemove({
+        id,
+        type,
+        url,
+        name
+      })
     })
+    await invalidate('profile:links')
   }
 
   const typeIconMap: Record<string, string> = {

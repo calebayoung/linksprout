@@ -84,7 +84,7 @@ async function saveProfilePhoto (): Promise<void> {
     {/if}
     {#if !uploading}
       <a href="/{$userData?.username}" class="flex items-center space-x-2 hover:text-lime-700">
-        <p>Continue</p>
+        <p>Continue to profile</p>
         <i class="fa-regular fa-arrow-right"/>
       </a>
     {/if}

@@ -5,7 +5,7 @@ import { error, fail, redirect } from '@sveltejs/kit'
 export const load = (async ({ locals, params }) => {
   const uid = locals.userID
   if (uid == null) {
-    throw redirect(301, '/login') as Error
+    throw redirect(301, '/login?action=signOut') as Error
   }
 
   const userDoc = await adminDb.collection('users').doc(uid).get()
@@ -43,5 +43,9 @@ export const actions = {
     await userRef.update({
       bio
     })
+
+    return {
+      bio
+    }
   }
 } satisfies Actions

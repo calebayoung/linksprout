@@ -12,15 +12,6 @@
 
   const dispatch = createEventDispatcher()
 
-  function onTrash (event: any): void {
-    dispatch('trashLink', {
-      id: event.detail.id,
-      type: event.detail.type,
-      url: event.detail.url,
-      name: event.detail.name
-    })
-  }
-
   function sortList (event: any): void {
     dispatch('sort', event.detail)
   }
@@ -40,7 +31,7 @@
   <ul class="w-full max-w-96">
     {#each links as link}
       <li class="w-full flex border-2 border-white p-2">
-        <UserLink id={link.id} type={link.type} url={link.url} name={link.name} edit={false} on:trash={onTrash}/>
+        <UserLink type={link.type} url={link.url} name={link.name} edit={false}/>
       </li>
     {/each}
   </ul>
