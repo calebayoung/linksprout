@@ -19,6 +19,7 @@
   links={data.links}
 />
 {#if $userData?.username === data.username}
-  <Button><a href="{data.username}/edit" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-pen-to-square"></i><span>Edit your profile</span></a></Button>
-  <Button><a href="{data.username}/bio" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-book-user"></i><span>Edit your bio</span></a></Button>
+  <hr class="w-full border-t border-gray-900/10 m-0"/>
+  <Button><a href="{data.username}/edit" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-pen-to-square"></i><span>Edit links</span></a></Button>
+  <Button><a href="{data.username}/bio" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-book-user"></i><span>Edit bio</span></a></Button>
 {/if}

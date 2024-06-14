@@ -7,6 +7,7 @@ import LoginCardHead from '$lib/components/LoginCardHead.svelte'
 import Photo from '$lib/components/Photo.svelte'
 import Button from '$lib/components/Button.svelte'
 import LoadingSpinner from '$lib/components/LoadingSpinner.svelte'
+import NavLink from '$lib/components/NavLink.svelte'
 
 let uploadNewPhoto: boolean = false
 let file: Blob
@@ -43,7 +44,7 @@ async function saveProfilePhoto (): Promise<void> {
 
 <AuthCheck>
   <LoginCardHead icon="fa-image" title="Upload a profile photo"/>
-  <form class="max-w-96 mx-auto mt-6 flex flex-col items-center space-y-8" autocomplete="off">
+  <form class="max-w-96 mx-auto mt-6 flex flex-col items-center space-y-6" autocomplete="off">
     {#if previewUrl != null || $userData?.photoUrl != null}
       <Photo photoUrl="{previewUrl ?? $userData?.photoUrl}"/>
     {:else}
@@ -83,10 +84,7 @@ async function saveProfilePhoto (): Promise<void> {
       {/if}
     {/if}
     {#if !uploading}
-      <a href="/{$userData?.username}" class="flex items-center space-x-2 hover:text-lime-700">
-        <p>Continue to profile</p>
-        <i class="fa-regular fa-arrow-right"/>
-      </a>
+      <NavLink href="/{$userData?.username}">Continue to profile</NavLink>
     {/if}
   </form>
 </AuthCheck>

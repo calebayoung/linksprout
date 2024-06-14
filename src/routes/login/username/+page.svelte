@@ -3,8 +3,8 @@ import { doc, getDoc, writeBatch } from 'firebase/firestore'
 import { db, user, userData } from '$lib/firebase'
 import AuthCheck from '$lib/components/AuthCheck.svelte'
 import LoginCardHead from '$lib/components/LoginCardHead.svelte'
-import Button from '$lib/components/Button.svelte'
 import LoadingSpinner from '$lib/components/LoadingSpinner.svelte'
+import NavLink from '$lib/components/NavLink.svelte'
 
 let username = ''
 let loading = false
@@ -56,7 +56,7 @@ async function confirmUsername (): Promise<void> {
       <div class="flex flex-col justify-center items-center mt-8 space-y-6">
         <p class="text-center">Your username is <strong>@{ $userData.username }</strong></p>
         <p class="text-center">(Usernames cannot be changed.)</p>
-        <Button><a href="/login/photo" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-upload"></i><span>Upload profile photo</span></a></Button>
+        <NavLink href="/login/photo">Upload photo</NavLink>
       </div>
     {:else}
       <form on:submit|preventDefault={confirmUsername} class="max-w-96 mx-auto mt-6" autocomplete="off">
