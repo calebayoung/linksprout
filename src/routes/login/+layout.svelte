@@ -1,6 +1,7 @@
 <script lang="ts">
 import { page } from '$app/stores'
 import AnimatedRoute from '$lib/components/AnimatedRoute.svelte'
+import ProfileDropdown from '$lib/components/ProfileDropdown.svelte'
 </script>
 
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -69,3 +70,4 @@ import AnimatedRoute from '$lib/components/AnimatedRoute.svelte'
     </AnimatedRoute>
   </div>
 </div>
+<ProfileDropdown/>
