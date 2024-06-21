@@ -9,8 +9,6 @@
   let profileDropdownExiting = false
   let profileDropdownInDom = false
 
-  console.log($page.url)
-
   function toggleProfileDropdown (): void {
     if (profileDropdownActive) {
       hideProfileDropdown()
@@ -57,7 +55,7 @@
         <span class="absolute -inset-1.5"></span>
         <span class="sr-only">Open user menu</span>
         <div class="h-8 w-8 flex justify-center items-center">
-          <i class="fa-regular fa-xl fa-compass text-gray-600"></i>
+          <i class="fa-regular fa-xl fa-circle-user text-gray-600"></i>
         </div>
       </button>
     </div>
