@@ -16,6 +16,8 @@ FB_CLIENT_EMAIL=""
 FB_PRIVATE_KEY=""
 ```
 
+(👆 to find these values: Firebase app settings → Service accounts → Generate new private key)
+
 ## Important Commands
 
 Install dependencies:
