@@ -1,6 +1,7 @@
 <script lang="ts">
 import { page } from '$app/stores'
 import AnimatedRoute from '$lib/components/AnimatedRoute.svelte'
+import HomeLink from '$lib/components/HomeLink.svelte'
 import ProfileDropdown from '$lib/components/ProfileDropdown.svelte'
 </script>
 
@@ -70,4 +71,5 @@ import ProfileDropdown from '$lib/components/ProfileDropdown.svelte'
     </AnimatedRoute>
   </div>
 </div>
+<HomeLink/>
 <ProfileDropdown/>

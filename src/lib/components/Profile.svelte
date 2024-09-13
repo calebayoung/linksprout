@@ -5,7 +5,7 @@
   import UserLink from '$lib/components/UserLink.svelte'
 
   export let username: string
-  export let photoUrl = '/user.png'
+  export let photoUrl: string
   export let bio = ''
   export let links: any[]
   export let edit = false
@@ -17,11 +17,14 @@
   }
 </script>
 
-<p class="text-lime-600 text-center"><i class="fa-regular fa-seedling fa-2xl"></i></p>
+<a href="/">
+<span class="sr-only">LinkSprout</span>
+  <p class="text-lime-600 text-center"><i class="fa-regular fa-seedling fa-2xl"></i></p>
+</a>
 <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">@{username}</h1>
-<Photo photoUrl="{photoUrl ?? '/user.png'}"/>
+<Photo photoUrl="{photoUrl}"/>
 {#if bio}
-  <p>{bio}</p>
+  <p class="text-center max-w-96">{bio}</p>
 {/if}
 {#if edit}
   <SortableList list={links} on:sort={sortList} let:item let:index>
