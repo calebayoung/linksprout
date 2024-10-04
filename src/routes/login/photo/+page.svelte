@@ -83,8 +83,11 @@ async function saveProfilePhoto (): Promise<void> {
         <LoadingSpinner text="Uploading..."/>
       {/if}
     {/if}
-    {#if !uploading}
+    {#if !uploading && $userData?.username}
       <NavLink href="/{$userData?.username}">Continue to profile</NavLink>
+    {/if}
+    {#if $userData?.username == null}
+      <p class="text-xs">(Please save a username to continue & create a profile.)</p>
     {/if}
   </form>
 </AuthCheck>

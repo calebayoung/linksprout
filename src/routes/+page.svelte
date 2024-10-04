@@ -57,7 +57,7 @@
     <div class="mx-auto max-w-2xl lg:text-center">
       <h2 class="text-base font-semibold leading-7 text-lime-600">#sideproject</h2>
       <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">🚀 Building something cool & having fun 😎</p>
-      <p class="mt-6 text-lg leading-8 text-gray-600">Shoutout to <a href="https://www.youtube.com/c/fireship" target="_blank" class="text-lime-600 underline">Fireship</a> for providing this course! It's a healthy size (small enough to be finish-able) and covers some interesting features.</p>
+      <p class="mt-6 text-lg leading-8 text-gray-600">Shoutout to <a href="https://www.youtube.com/c/fireship" target="_blank" class="text-lime-600 underline">Fireship</a> for providing this course 👏 It's a healthy size (small enough to be finished) and covers interesting features.</p>
     </div>
     <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
       <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
@@ -86,7 +86,7 @@
             </div>
             Tailwind CSS & Tailwind UI
           </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">I'm not a designer, but I really like working with good designs 🎨 Tailwind CSS & Tailwind UI are now my go-tos for side projects.</dd>
+          <dd class="mt-2 text-base leading-7 text-gray-600">I'm not a designer, but I really like working with good designs 🎨 Tailwind CSS & Tailwind UI are my go-tos for side projects.</dd>
         </div>
         <div class="relative pl-16">
           <dt class="text-base font-semibold leading-7 text-gray-900">

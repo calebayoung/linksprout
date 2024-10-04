@@ -76,5 +76,5 @@
     {/each}
   </ul>
 {:else}
-  <p>No items</p>
+  <p>No links - add one below.</p>
 {/if}

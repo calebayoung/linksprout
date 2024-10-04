@@ -1,4 +1,4 @@
-import { collection, getDocs, limit, query, where } from 'firebase/firestore'
+import { collection, getDoc, getDocs, limit, query, where, doc, setDoc } from 'firebase/firestore'
 import { error } from '@sveltejs/kit'
 import { db } from '$lib/firebase'
 import type { UserData } from '$lib/firebase'
@@ -15,7 +15,7 @@ export const getProfile = async (username: string): Promise<UserData> => {
   const data = snapshot.docs[0]?.data()
 
   if (!exists) {
-    throw error(404, 'Page not found.') as Error
+    throw error(404, 'Profile not found.') as Error
   }
 
   if (data.published === false) {
@@ -29,4 +29,29 @@ export const getProfile = async (username: string): Promise<UserData> => {
     published: data.published,
     links: data.links ?? []
   }
+}
+
+export const getProfileByUserId = async (userId: string): Promise<UserData> => {
+  const docRef = doc(db, 'users', userId)
+  const snapshot = await getDoc(docRef)
+  const exists = snapshot.exists()
+  const data = snapshot.data()
+
+  if (!exists) {
+    throw error(404, 'Profile not found.') as Error
+  }
+
+  return {
+    username: data?.username,
+    bio: data?.bio,
+    photoUrl: data?.photoUrl,
+    published: data?.published,
+    links: data?.links ?? []
+  }
+}
+
+export const createNewProfile = async (userId: string): Promise<void> => {
+  await setDoc(doc(db, 'users', userId), {
+    published: false
+  })
 }

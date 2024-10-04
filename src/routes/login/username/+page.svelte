@@ -1,6 +1,7 @@
 <script lang="ts">
-import { doc, getDoc, writeBatch } from 'firebase/firestore'
+import { doc, writeBatch } from 'firebase/firestore'
 import { db, user, userData } from '$lib/firebase'
+import { usernameExists } from '$lib/services/UsernameService'
 import AuthCheck from '$lib/components/AuthCheck.svelte'
 import LoginCardHead from '$lib/components/LoginCardHead.svelte'
 import LoadingSpinner from '$lib/components/LoadingSpinner.svelte'
@@ -17,8 +18,7 @@ async function queryUsernameExists (): Promise<void> {
     loading = false
     return
   }
-  const ref = doc(db, 'usernames', username)
-  const exists = await getDoc(ref).then(doc => doc.exists())
+  const exists = await usernameExists(username)
   availabilityChecked = true
   isAvailable = !exists
   loading = false

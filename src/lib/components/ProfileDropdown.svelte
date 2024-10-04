@@ -48,7 +48,7 @@
   }
 </script>
 
-{#if $userData?.username}
+{#if $userData}
   <div class="absolute top-6 right-10">
     <div>
       <button type="button" on:click={toggleProfileDropdown} on:blur={onBlur} class="relative flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
@@ -75,7 +75,9 @@
         aria-labelledby="user-menu-button"
         tabindex="-1"
       >
-        <a href="/{$userData?.username}" class="block px-4 py-2 text-sm text-gray-700" class:bg-gray-100={$page.url.pathname === `/${$userData?.username}`} role="menuitem" tabindex="-1" id="user-menu-item-0">My profile</a>
+        {#if $userData.username}
+          <a href="/{$userData?.username}" class="block px-4 py-2 text-sm text-gray-700" class:bg-gray-100={$page.url.pathname === `/${$userData?.username}`} role="menuitem" tabindex="-1" id="user-menu-item-0">My profile</a>
+        {/if}
         <a href="/login" class="block px-4 py-2 text-sm text-gray-700" class:bg-gray-100={$page.url.pathname.includes('login')} role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
         <button on:click={logOut} class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</button>
       </div>
