@@ -75,6 +75,4 @@
       </li>
     {/each}
   </ul>
-{:else}
-  <p>No links - add one below.</p>
 {/if}

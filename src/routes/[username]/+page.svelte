@@ -17,6 +17,7 @@
   photoUrl={data.photoUrl}
   bio={data.bio}
   links={data.links}
+  currentUserViewing={$userData?.username === data.username}
 />
 {#if $userData?.username === data.username}
   <hr class="w-full border-t border-gray-900/10 m-0"/>

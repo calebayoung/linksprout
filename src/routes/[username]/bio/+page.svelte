@@ -7,6 +7,8 @@
 
   export let data: PageData
 
+  let newBio: string = data.bio
+
   let formLoading = false
   let saveSuccess = false
 </script>
@@ -62,7 +64,7 @@
   <div>
     <label for="bio" class="block text-sm font-medium leading-6 text-gray-900">Bio</label>
     <div class="mt-2">
-      <textarea rows="4" name="bio" id="bio" bind:value={data.bio} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"></textarea>
+      <textarea rows="4" name="bio" id="bio" bind:value={newBio} class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"></textarea>
     </div>
   </div>
   <div>

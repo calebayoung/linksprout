@@ -1,6 +1,5 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { page } from '$app/stores'
   import { signOut } from 'firebase/auth'
   import { auth, userData } from '$lib/firebase'
 
@@ -76,10 +75,10 @@
         tabindex="-1"
       >
         {#if $userData.username}
-          <a href="/{$userData?.username}" class="block px-4 py-2 text-sm text-gray-700" class:bg-gray-100={$page.url.pathname === `/${$userData?.username}`} role="menuitem" tabindex="-1" id="user-menu-item-0">My profile</a>
+          <a href="/{$userData?.username}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">My profile</a>
         {/if}
-        <a href="/login" class="block px-4 py-2 text-sm text-gray-700" class:bg-gray-100={$page.url.pathname.includes('login')} role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-        <button on:click={logOut} class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</button>
+        <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+        <button on:click={logOut} class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</button>
       </div>
     {/if}
   </div>

@@ -93,6 +93,7 @@
     links={data.links}
     edit={true}
     on:sort={sort}
+    on:showAddLinkForm={showAddLinkForm}
   />
   <div class="w-full max-w-96">
     <hr class="w-full border-t border-gray-900/10 m-0"/>
@@ -113,10 +114,10 @@
         </div>
       </div>
       <div>
-        <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+        <label for="website-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
         <div class="mt-2">
           <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-lime-600 sm:max-w-md">
-            <input bind:value={$formData.name} type="text" name="name" id="name" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder={namePlaceholders[$formData.type]}>
+            <input bind:value={$formData.name} type="text" name="website-name" id="website-name" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder={namePlaceholders[$formData.type]}>
           </div>
         </div>
       </div>
@@ -134,7 +135,6 @@
       </div>
     </form>
   {:else}
-    <Button onClick={showAddLinkForm}><i class="fa-regular fa-link mr-3"></i><span>Add a link</span></Button>
     <Button><a href="/{data.username}" class="w-full flex justify-center items-center gap-3"><i class="fa-regular fa-floppy-disk"></i><span>Save changes</span></a></Button>
   {/if}
 </EditCheck>
