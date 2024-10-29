@@ -43,6 +43,11 @@ Preview a production version of the app:
 npm run preview
 ```
 
+Deploy to Firebase:
+```bash
+firebase deploy
+```
+
 ## Relevant Links
 
 [fkit-course Repo](https://github.com/fireship-io/fkit-course/tree/main)
