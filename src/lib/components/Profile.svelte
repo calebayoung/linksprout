@@ -23,7 +23,7 @@
 </script>
 
 <a href="/">
-<span class="sr-only">LinkSprout</span>
+  <span class="sr-only">LinkSprout</span>
   <p class="text-lime-600 text-center"><i class="fa-regular fa-seedling fa-2xl"></i></p>
 </a>
 <h1 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">@{username}</h1>

@@ -37,25 +37,27 @@
   }
 </script>
 
-<a href={url} class="group/link w-full ring-1 ring-gray-300 shadow-sm hover:bg-gray-50 rounded p-4 flex items-center">
-  {#if edit}
+{#if edit}
+  <div class="group/link w-full ring-1 ring-gray-300 shadow-sm hover:bg-gray-50 rounded p-4 flex items-center">
     <i class="fa-regular fa-grip-dots-vertical text-gray-600"/>
-  {:else}
+    <span class="w-full flex justify-center pr-8 ml-10">{name}</span>
+    {#if loading}
+      <div class="flex justify-center items-center rounded bg-red-500">
+        <i class="fa-regular fa-loader text-white p-2"/>
+      </div>
+    {:else}
+      <button on:click|preventDefault={onTrash} class="group/trash flex justify-center items-center rounded invisible group-hover/link:visible hover:bg-red-500 m-0">
+        <i class="fa-regular fa-trash-can text-red-400 group-hover/trash:text-white p-2"/>
+      </button>
+    {/if}
+  </div>
+{:else}
+  <a href={url} class="group/link w-full ring-1 ring-gray-300 shadow-sm hover:bg-gray-50 rounded p-4 flex items-center">
     <i class="{typeIconMap[type] ?? 'fa-regular fa-link'} text-gray-600"/>
-  {/if}
-  <span class="w-full flex justify-center pr-8 ml-10">{name}</span>
-  {#if loading}
-    <div class="flex justify-center items-center rounded bg-red-500">
-      <i class="fa-regular fa-loader text-white p-2"/>
-    </div>
-  {:else if edit}
-    <button on:click|preventDefault={onTrash} class="group/trash flex justify-center items-center rounded invisible group-hover/link:visible hover:bg-red-500 m-0">
-      <i class="fa-regular fa-trash-can text-red-400 group-hover/trash:text-white p-2"/>
-    </button>
-  {:else}
+    <span class="w-full flex justify-center pr-8 ml-10">{name}</span>
     <div class="p-4"/>
-  {/if}
-</a>
+  </a>
+{/if}
 
 <style>
 .fa-loader {

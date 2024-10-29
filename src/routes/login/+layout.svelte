@@ -63,7 +63,7 @@ import ProfileDropdown from '$lib/components/ProfileDropdown.svelte'
       </ol>
     </nav>
     <AnimatedRoute>
-      <div class="bg-white shadow sm:rounded-lg">
+      <div class="bg-white shadow rounded-lg">
         <div class="px-16 py-10">
           <slot />
         </div>

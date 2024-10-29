@@ -8,7 +8,7 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "npx eslint 'src/**/*.{ts,svelte}'"
+		"lint": "npx eslint 'src/**/*.{ts,svelte}'"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
