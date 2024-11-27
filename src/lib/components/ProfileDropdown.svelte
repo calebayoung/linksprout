@@ -48,7 +48,7 @@
 </script>
 
 {#if $userData}
-  <div class="absolute top-6 right-10 bg-white rounded-full shadow">
+  <div class="absolute top-8 lg:top-6 right-10 bg-white rounded-full shadow">
     <div>
       <button type="button" on:click={toggleProfileDropdown} on:blur={onBlur} class="relative flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
         <span class="absolute -inset-1.5"></span>
