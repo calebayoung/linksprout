@@ -1,7 +1,5 @@
 <script lang="ts">
   import { user, userData } from '$lib/firebase'
-
-  console.log($user)
 </script>
 
 <div class="bg-white">

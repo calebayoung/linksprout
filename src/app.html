@@ -14,4 +14,25 @@
     <div style="display: contents">%sveltekit.body%</div>
   </body>
   <script src="https://kit.fontawesome.com/b4563190c1.js" crossorigin="anonymous"></script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js';
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js';
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: 'AIzaSyDDbahB9NZt8iU3YRlMUXFJWqo09BTJZwQ',
+      authDomain: 'linksprout-2cce7.firebaseapp.com',
+      projectId: 'linksprout-2cce7',
+      storageBucket: 'linksprout-2cce7.appspot.com',
+      messagingSenderId: '287552625797',
+      appId: '1:287552625797:web:0bafe11044484598095dec',
+      measurementId: 'G-RM6N89LZBK'
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </html>
